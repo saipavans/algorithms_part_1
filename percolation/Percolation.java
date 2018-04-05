@@ -23,7 +23,7 @@ public class Percolation {
 				grid[i][j] = BLOCK_VALUE;
 			}
 		}
-		modelGridDetails();
+		modelGridDetails(); 
 		connectVirtualNodes();
 	}
 	
@@ -141,6 +141,9 @@ public class Percolation {
 	}
 	
 	public boolean percolates() {
+		if (virtualBottomNodeIndex == 2) { // Only possible when the grid has only one site, i.e grid[0]
+			return grid[0][0] ==  OPEN_VALUE;
+		}
 		return weightedTreeList.connected(virtualTopNodeIndex, virtualBottomNodeIndex);
 	}
 		
