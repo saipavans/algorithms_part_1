@@ -119,6 +119,7 @@ public class Percolation {
 	}
 	
 	public boolean isFull(int row, int col) {
+		boolean isFull = false;
 		if (row <= 0 || row > grid.length){
 			throw new IllegalArgumentException();
 		} else {
@@ -130,8 +131,13 @@ public class Percolation {
 		} else {
 			col -= 1;
 		}
-		int linearizedIndex = gridToTreeListIndexing(row, col);
-		return weightedTreeList.connected(virtualTopNodeIndex, linearizedIndex);
+		
+		if (grid[row][col] == OPEN_VALUE) {
+			int linearizedIndex = gridToTreeListIndexing(row, col);
+			isFull =  weightedTreeList.connected(virtualTopNodeIndex, linearizedIndex);
+		}
+		
+		return isFull;
 	}
 	
 	public boolean percolates() {
